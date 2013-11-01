@@ -21,10 +21,8 @@ var SLIDE_CONFIG = {
   presenters: [{
     name: 'Jongmin Kim',
     company: 'GDG Korea Golang',
-    gplus: 'http://j.mp/atomaths',
-    twitter: '@atomaths',
-    www: 'http://atomaths.github.io',
-    github: 'http://github.com/atomaths'
+    gplus: 'http://google.com/+JongminKim',
+    twitter: '@atomaths'
   }/*, {
     name: 'Second Name',
     company: 'Job Title, Google',
