@@ -22,8 +22,7 @@ var SLIDE_CONFIG = {
     name: 'Jongmin Kim',
     company: 'GDG Korea Golang',
     gplus: 'http://google.com/+JongminKim',
-    twitter: '@atomaths',
-    slide: 'http://github.com/atomaths/talks/go.tools'
+    twitter: '@atomaths'
   }/*, {
     name: 'Second Name',
     company: 'Job Title, Google',
