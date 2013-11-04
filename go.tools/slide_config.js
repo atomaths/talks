@@ -3,7 +3,7 @@ var SLIDE_CONFIG = {
   settings: {
     title: 'Go Tools',
     subtitle: '',
-    eventTitle: 'GDG DevFest Korea 2013',
+    // eventTitle: 'GDG DevFest Korea 2013',
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
     enableSlideAreas: true, // Default: true. False turns off the click areas on either slide of the slides.
