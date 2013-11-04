@@ -76,18 +76,46 @@
       <h2>go version</h2>
     </hgroup>
     <article>
-      <p>From binary install</p>
+      <p>Installed from Go binary distributions</p>
       <pre class="" data-lang="shell">
 $ go version
 go version go1.1.2 linux/amd64
 $
 </pre>
       <br>
-      <p>From source install</p>
+      <p>Installed from Go source</p>
       <pre class="" data-lang="shell">
 $ go version
 go version devel +78cebfb89b21 Fri Nov 01 09:18:35 2013 -0700 linux/amd64
 $
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>go env</h2>
+    </hgroup>
+    <article>
+      <pre class="" data-lang="shell">
+$ go env
+GOARCH="amd64"
+GOBIN="/home/atomaths/gopath/bin"
+GOCHAR="6"
+GOEXE=""
+GOHOSTARCH="386"
+GOHOSTOS="amd64"
+GOOS="linux"
+GOPATH="/home/atomaths/gopath"
+GORACE=""
+GOROOT="/home/atomaths/go.dev"
+GOTOOLDIR="/home/atomaths/go.dev/pkg/tool/linux_amd64"
+TERM="dumb"
+CC="gcc"
+GOGCCFLAGS="-g -O2 -fPIC -m32 -pthread"
+CXX="g++"
+CGO_ENABLED="1"
+$ 
 </pre>
     </article>
   </slide>
