@@ -118,6 +118,12 @@ $
       <h2>go build</h2>
     </hgroup>
     <article>
+      <p>Demo: demos/run/</p>
+      <br>
+      <ul>
+        <li>GDB (&gt;7.1) 지원: -gcflags "-N -l"</li>
+        <li><a href="http://golang.org/doc/gdb">Debugging Go Code with GDB</a></li>
+      </ul>
     </article>
   </slide>
 
@@ -126,7 +132,7 @@ $
       <h2>go install</h2>
     </hgroup>
     <article>
-      <p>Demo: demos/run/</p>
+      <p>Demo: demos/install/{cmd,pkg}</p>
     </article>
   </slide>
 
@@ -135,6 +141,13 @@ $
       <h2>go clean</h2>
     </hgroup>
     <article>
+      <p>Demo: demos/install/{cmd,pkg}</p>
+      <br>
+      <ul>
+        <li>build나 test 시 로컬에 생긴 임시 오브젝트 파일들을 삭제함</li>
+        <li>$GOPATH/bin/ 이나 $GOPATH/pkg/$GOOS_$GOARCH/ 아래에 생긴 파일들은 삭제하지 않음. (-i 플래그를 주면 삭제됨)</li>
+        <li>참고: go clean -h</li>
+      </ul>
     </article>
   </slide>
 
