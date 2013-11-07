@@ -280,7 +280,65 @@ func main() {
       <h2>go get</h2>
     </hgroup>
     <article>
-      <p>$ go help importpath</p>
+    <p>패키지 다운로드/설치</p>
+    <pre data-lang="shell">
+$ go get github.com/gorilla/mux
+</pre><br>
+    <p>패키지 업데이트</p>
+    <pre data-lang="shell">
+$ go get -u github.com/gorilla/mux
+</pre><br>
+    <p>하위 디렉토리 모든 의존성 패키지들 다운로드/설치</p>
+    <pre data-lang="shell">
+$ go get ./...
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>import paths</h2>
+    </hgroup>
+    <article>
+      <pre>
+Bitbucket (Git, Mercurial)
+
+        import "bitbucket.org/user/project"
+        import "bitbucket.org/user/project/sub/directory"
+
+GitHub (Git)
+
+        import "github.com/user/project"
+        import "github.com/user/project/sub/directory"
+
+Google Code Project Hosting (Git, Mercurial, Subversion)
+
+        import "code.google.com/p/project"
+        import "code.google.com/p/project/sub/directory"
+
+Launchpad (Bazaar)
+
+        import "launchpad.net/project"
+        import "launchpad.net/project/series"
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>import paths</h2>
+    </hgroup>
+    <article>
+      <p>지원하는 VCS들: </p>
+      <pre>
+Bazaar      .bzr
+Git         .git
+Mercurial   .hg
+Subversion  .svn
+</pre>
+      <pre class="prettyprint" data-lang="go">
+import "example.org/repo.git/foo/bar"
+</pre>
     </article>
   </slide>
 
