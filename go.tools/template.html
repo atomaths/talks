@@ -325,11 +325,22 @@ Launchpad (Bazaar)
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        <p>import "example.org/pkg/foo"</p>
+        <pre>
+https://example.org/pkg/foo?go-get=1 (preferred)
+http://example.org/pkg/foo?go-get=1  (fallback)
+</pre>
+        <p>&lt;meta name="go-import"<br>content="example.org git https://code.org/r/p/exproj"&gt;
+</p>
+      </section>
+    </aside>
     <hgroup>
       <h2>import paths</h2>
     </hgroup>
     <article>
-      <p>지원하는 VCS들: </p>
+      <p>지원하는 VCS: </p>
       <pre>
 Bazaar      .bzr
 Git         .git
@@ -347,6 +358,27 @@ import "example.org/repo.git/foo/bar"
       <h2>go fmt</h2>
     </hgroup>
     <article>
+      <p>Go 소스코드의 포맷을 통일시켜 줍니다.</p>
+      <p>Demo: gofmt/gofmt.go</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>go fmt</h2>
+    </hgroup>
+    <article>
+      <p>-r rule: Apply rewrite rule</p>
+      <pre data-lang="shell">
+$ gofmt -r '(a) -> a' -w *.go
+</pre>
+      <p>-s: Try to simplify code</p>
+      <pre>
+s[a:len(s)]   --->  s[a:]
+</pre>
+      <pre>
+for x, _ = range v {...}   --->   for x = range v {...}
+</pre>
     </article>
   </slide>
 
@@ -444,7 +476,8 @@ import "example.org/repo.git/foo/bar"
       <h2>다루지 못한 것들</h2>
     </hgroup>
     <article>
-      <p>GDB, cgo, SWIG, golint, ...</p>
+      <p>GDB, cgo, SWIG, golint, http://sourcegraph.com, ...</p>
+      <p>https://sourcegraph.com/code.google.com/p/go/tree</p>
     </article>
   </slide>
 
