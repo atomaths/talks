@@ -359,7 +359,7 @@ import "example.org/repo.git/foo/bar"
     </hgroup>
     <article>
       <p>Go 소스코드의 포맷을 통일시켜 줍니다.</p>
-      <p>Demo: gofmt/gofmt.go</p>
+      <p>Demo: demos/gofmt/gofmt.go</p>
     </article>
   </slide>
 
@@ -383,10 +383,34 @@ for x, _ = range v {...}   --->   for x = range v {...}
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        testing.T는 테스트에 대한 상태와 formatted logging을 위한 struct.
+        testing.B는 벤치마크 타이밍을 관리하거나 반복실행 횟수를 지저하기 위한 struct.
+      </section>
+    </aside>
     <hgroup>
       <h2>go test</h2>
     </hgroup>
     <article>
+      <ul>
+        <li>"*_test.go" 파일들을 해당 패키지와 같이 컴파일</li>
+        <li>TestXXX(t *testing.T), Benchmark(b *testing.B), ExampleXXX() function을 찾아 호출해줌</li>
+      </ul>
+      <p>Demo: demos/test/sqrt.go</p>
+      <p>참고: <a href="http://golang.org/pkg/testing/">http://golang.org/pkg/testing/</a></p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>go test -cover</h2>
+    </hgroup>
+    <article>
+      <p>Go 1.2 부터</p>
+      <p>Demo: demos/test/sqrt.go</p>
+      <p>참고: <a href="http://tip.golang.org/doc/go1.2#cover">Go 1.2 Test coverage</a></p>
+    </article>
     </article>
   </slide>
 
@@ -416,34 +440,10 @@ for x, _ = range v {...}   --->   for x = range v {...}
 
   <slide>
     <hgroup>
-      <h2>go vet</h2>
-    </hgroup>
-    <article>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>go tool pprof</h2>
-    </hgroup>
-    <article>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>go cover</h2>
-    </hgroup>
-    <article>
-      <p>Test coverage: http://tip.golang.org/doc/go1.2#cover</p>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
       <h2>go oracle</h2>
     </hgroup>
     <article>
+      <p>http://goo.gl/ccTudb</p>
     </article>
   </slide>
 
@@ -473,11 +473,13 @@ for x, _ = range v {...}   --->   for x = range v {...}
 
   <slide>
     <hgroup>
-      <h2>다루지 못한 것들</h2>
+      <h2>Moreover</h2>
     </hgroup>
     <article>
+      <p>go vet, go tool pprof, ...</p>
       <p>GDB, cgo, SWIG, golint, http://sourcegraph.com, ...</p>
       <p>https://sourcegraph.com/code.google.com/p/go/tree</p>
+      <p>참고: golang.org/cmd/go, tip.golang.org/doc/1.2</p>
     </article>
   </slide>
 
