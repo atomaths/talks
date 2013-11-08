@@ -441,6 +441,16 @@ for x, _ = range v {...}   --->   for x = range v {...}
       <h2>godoc</h2>
     </hgroup>
     <article>
+      <pre>
+godoc fmt                # documentation for package fmt
+godoc fmt Printf         # documentation for fmt.Printf
+godoc cmd/go             # force documentation for the go command
+godoc -src fmt           # fmt package interface in Go source form
+godoc -src fmt Printf    # implementation of fmt.Printf
+</pre>
+      <pre data-lang="shell">
+$ godoc -v -http=:8000
+</pre>
     </article>
   </slide>
 
@@ -450,6 +460,7 @@ for x, _ = range v {...}   --->   for x = range v {...}
     </hgroup>
     <article>
       <p>http://goo.gl/ccTudb</p>
+      <p>https://github.com/fzipp/pythia</p>
     </article>
   </slide>
 
