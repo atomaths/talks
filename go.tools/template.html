@@ -226,31 +226,21 @@ created by time.goFunc
     <hgroup>
       <h2>race detector</h2>
     </hgroup>
-    <article class="smaller">
+    <article>
       <pre class="" data-lang="shell">
 ==================
 WARNING: DATA RACE
-Read by goroutine 5:
+Read by goroutine 4:
   main.func·001()
-      race.go:14 +0x160
-  gosched0()
-      /usr/local/go/src/pkg/runtime/proc.c:1218 +0x9f
+      /home/atomaths/gopath/src/github.com/atomaths/talks/go.tools/demos/race/race.go:14 +0x177
 
-Previous write by goroutine 1:
+Previous write by main goroutine:
   main.main()
-      race.go:15 +0x16b
-  runtime.main()
-      /usr/local/go/src/pkg/runtime/proc.c:182 +0x91
+      /home/atomaths/gopath/src/github.com/atomaths/talks/go.tools/demos/race/race.go:15 +0x154
 
-Goroutine 5 (running) created at:
+Goroutine 4 (running) created at:
   time.goFunc()
-      /usr/local/go/src/pkg/time/sleep.go:122 +0x56
-  timerproc()
-      /usr/local/go/src/pkg/runtime/ztime_linux_amd64.c:184 +0x189
-
-Goroutine 1 (running) created at:
-  _rt0_amd64()
-      /usr/local/go/src/pkg/runtime/asm_amd64.s:87 +0x106
+      /home/atomaths/go.dev/src/pkg/time/sleep.go:123 +0x55
 ==================
 </pre>
     </article>
@@ -261,7 +251,7 @@ Goroutine 1 (running) created at:
       <h2>race detector</h2>
     </hgroup>
     <article>
-      <p>t는 오로지 main goroutine에서만 read, write 하도록 수정
+      <p>t는 main goroutine에서만 read, write 하도록 수정
       <pre class="prettyprint" data-lang="go">
 func main() {
         start := time.Now()
@@ -304,7 +294,7 @@ $ go get ./...
     <hgroup>
       <h2>import paths</h2>
     </hgroup>
-    <article>
+    <article class="smaller">
       <pre>
 Bitbucket (Git, Mercurial)
 
@@ -400,8 +390,15 @@ for x, _ = range v {...}   --->   for x = range v {...}
     <article>
       <ul>
         <li>"*_test.go" 파일들을 해당 패키지와 같이 컴파일</li>
-        <li>TestXXX(t *testing.T), Benchmark(b *testing.B), ExampleXXX() function을 찾아 호출해줌</li>
+        <br>
       </ul>
+      <p>이런 이름을 가진 함수들을 찾아 호출해줌</p>
+      <pre>
+TestXXX(t *testing.T)
+BenchmarkXXX(b *testing.B)
+ExampleXXX()
+</pre>
+        
       <p>Demo: demos/test/sqrt.go</p>
       <p>참고: <a href="http://golang.org/pkg/testing/">http://golang.org/pkg/testing/</a></p>
     </article>
@@ -424,7 +421,7 @@ for x, _ = range v {...}   --->   for x = range v {...}
       <h2>go fix</h2>
     </hgroup>
     <article>
-      <p>새로운 Go 버전이 나왔을 때 하위호환성이 없는 오래된 API가 사용된 부분을 새로운 API를 사용하라고 찾아줌.</p>
+      <p>새로운 Go 버전이 나왔을 때 오래된 API가 사용된 부분은 새로운 API를 사용하라고 찾아줌.</p>
     </article>
   </slide>
 
@@ -459,8 +456,9 @@ $ godoc -v -http=:8000
       <h2>go oracle</h2>
     </hgroup>
     <article>
-      <p>http://goo.gl/ccTudb</p>
-      <p>https://github.com/fzipp/pythia</p>
+      <p>소스 분석 툴</p>
+      <p>User manual: <a href="http://goo.gl/ccTudb">http://goo.gl/ccTudb</a></p>
+      <p>웹 버전: <a href="https://github.com/fzipp/pythia">https://github.com/fzipp/pythia</a></p>
     </article>
   </slide>
 
@@ -477,6 +475,10 @@ $ godoc -v -http=:8000
       <h2>gocode</h2>
     </hgroup>
     <article>
+      <p>autocompletion tool</p>
+      <pre data-lang="shell">
+$ go get github.com/nsf/gocode
+</pre>
     </article>
   </slide>
 
@@ -485,18 +487,34 @@ $ godoc -v -http=:8000
       <h2>godef</h2>
     </hgroup>
     <article>
+      <pre data-lang="shell">
+$ go get code.google.com/p/rog-go/exp/cmd/godef
+</pre>
     </article>
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        <p>Golint differs from gofmt. Gofmt reformats Go source code, whereas
+        golint prints out style mistakes.</p><br>
+        <p>Golint differs from govet. Govet is concerned with correctness, whereas
+        golint is concerned with coding style. Golint is in use at Google, and it
+        seeks to match the accepted style of the open source Go project.</p>
+      </section>
+    </aside>
     <hgroup>
       <h2>Moreover</h2>
     </hgroup>
     <article>
       <p>go vet, go tool pprof, ...</p>
-      <p>GDB, cgo, SWIG, golint, http://sourcegraph.com, ...</p>
-      <p>https://sourcegraph.com/code.google.com/p/go/tree</p>
-      <p>참고: golang.org/cmd/go, tip.golang.org/doc/1.2</p>
+      <p>GDB, cgo, SWIG, golint, ...</p>
+      <p><a href="https://sourcegraph.com/code.google.com/p/go/tree">https://sourcegraph.com/code.google.com/p/go/tree</a></p>
+      <br>
+      <p>참고:<br>
+        <a href="http://golang.org/cmd/go">http://golang.org/cmd/go</a><br>
+        <a href="http://tip.golang.org/doc/1.2">http://tip.golang.org/doc/1.2</a>
+      </p>
     </article>
   </slide>
 
