@@ -114,6 +114,11 @@ $
   </slide>
 
   <slide>
+    <aside class="note">
+      <section>
+        gc 툴체인으로 Go 프로그램을 컴파일하고 링킹할 때, 바이너리에 DWARFv3 디버깅 인포메이션을 포함한다. GDB 7.1 이상부터는 이 정보를 이용해서 live process나 core dump를 디버깅할 수 있다.
+      </section>
+    </aside>
     <hgroup>
       <h2>go build</h2>
     </hgroup>
@@ -419,6 +424,7 @@ for x, _ = range v {...}   --->   for x = range v {...}
       <h2>go fix</h2>
     </hgroup>
     <article>
+      <p>새로운 Go 버전이 나왔을 때 하위호환성이 없는 오래된 API가 사용된 부분을 새로운 API를 사용하라고 찾아줌.</p>
     </article>
   </slide>
 
