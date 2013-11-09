@@ -1,6 +1,6 @@
 package main
 
 func main() {
-	println("Gopher")
-	// println(Foo("Gopher"))
+	println("Hello, Gopher")
+	// println(Foo("Hello, Gopher"))
 }
