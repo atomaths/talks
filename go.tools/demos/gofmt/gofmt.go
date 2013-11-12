@@ -1,18 +1,18 @@
 package main
 
 import (
-       "log"
 	"fmt"
+	"log"
 )
 
 func sqrt(i int) int {
-    return i*i
+	return i * i
 }
 
-func main(){
-	for i := 0; i<10; i++ {
-		fmt.Println(  sqrt(i)  )
+func main() {
+	for i := 0; i < 10; i++ {
+		fmt.Println(sqrt(i))
 	}
 
-    log.Print("Hello" + "World")
+	log.Print("Hello" + "World")
 }
