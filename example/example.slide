@@ -52,4 +52,4 @@ _이건_이탤릭_
 
 * 더 보기
 
-.link http://godoc.org/code.google.com/p/go.talks/pkg/present present package
+.link http://godoc.org/golang.org/x/tools/present Go present package
