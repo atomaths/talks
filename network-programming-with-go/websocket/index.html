@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script>
+if (window.MozWebSocket) {
+	window.WebSocket = window.MozWebSocket;;
+}
+
+$(document).ready(function() {
+    $("#user_id").keyup(function(e) {
+        if (e.keyCode == 13) signIn();
+    });
+    $("#btn_login").click(signIn);
+
+    $('#user_id').focus();
+});
+
+function signIn()
+{
+    if ($.trim($('#user_id').val()).length == 0) {
+        return;
+    }
+
+    var url = window.location.host + '/chat';
+    var ws;
+
+    if (window.WebSocket) {
+        ws = new WebSocket('ws://' + url);
+    } else {
+        alert_msg("Your browser doesn't support WebSocket.");
+        return;
+    }
+
+    ws.onopen = function() { // Connected
+        $('#login_page').hide();
+	$('#chat_page').show();
+	$('#send').focus();
+	ws.send($.trim($('#user_id').val()));
+
+	// for Mozilla
+	$('#send').removeAttr('disabled');
+	$('#send').focus();
+	$('#btn_send').removeAttr('disabled');
+    };
+
+    ws.onclose = function() { // Closed
+	alert_msg('채팅이 종료되었습니다.', false);
+	$('#send').attr('disabled', true);
+	$('#btn_send').attr('disabled', true);
+    };
+
+    ws.onmessage = function(e) { // Received
+        print(e.data);
+    };
+
+    // Send message
+    send = function() {
+	ws.send($('#send').val());
+	$('#send').val('');
+	$('#send').focus();
+    };
+    $("#send").keyup(function(e) {
+        if (e.keyCode == 13) send();
+    });
+    $('#btn_send').click(send);
+
+    $('#btn_close').click(function() {
+	ws.close();
+    });
+}
+
+function print(msg)
+{
+    $('#chat_window').append(msg + '<br>');
+    $('#chat_window').scrollTop($('#chat_window').innerHeight());
+}
+
+function alert_msg(msg, fadeout)
+{
+    fadeout = (typeof fadeout == 'undefined') ? true : false;
+
+    $('#msg').text(msg);
+    $('#msg').show();
+    if (fadeout) {
+	$('#msg').fadeOut(5000);
+    }
+}
+</script>
+<style>
+    body { font: 12px Verdana, Arial, Helvetica, sans-serif; }
+</style>
+</head>
+
+<body>
+<div id="msg" style="display: none; color: #ffffff; background-color: #eb574a; padding: 5px; margin-bottom: 10px; font-weight: bold;"></div>
+<div id="login_page">
+    <input type="text" id="user_id" placeholder="아이디" />
+    <input type="button" id="btn_login" value="로그인" />
+</div>
+
+<div id="chat_page" style="display: none;">
+    <div id='chat_window' style="border: 1px solid; width: 98%; height: 300px; padding: 5px; line-height: 14px; overflow-y: auto;"></div>
+    <div style="margin-top: 3px;">
+	<input type="text" id="send" size="70" placeholder="메시지를 입력하세요" />
+	<input type="button" id="btn_send" value="보내기" />
+	<input type="button" id="btn_close" value="종료" />
+    </div>
+</div>
+</body>
+</html>

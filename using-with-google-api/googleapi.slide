@@ -1,0 +1,84 @@
+Using Google API in Go
+Apr 20, 2013
+
+Jongmin Kim
+GDG Korea Golang
+http://j.mp/Jongmin
+
+* 차례
+
+- OAuth
+- API console, API explorer 등의 도구들
+- Keys, access, security, and identity
+- Google API를 사용하기 위한 패키지들
+- Web applications 인증 데모
+- Service accounts 인증 데모
+- Google APIs Directory Service
+- Google Auth Proxy by Bitly
+
+* OAuth 1.0a
+
+.code res/snippets /Authorization:/,/oauth_version="1.0"/
+
+- HMAC을 이용한 암호화 인증 방식만 제공
+- 매번 signature를 생성해야 함
+- curl 등으로 테스트해보기 어려움
+- 기본적으로 3-legged 모델
+
+* OAuth 2.0
+
+- 3-legged 뿐만 아니라 2-legged 모델도 지원
+- 아직 draft 버전 31. Google은 22 구현. Facebook은 12 구현
+- Client(1.0a에서 Consumer)는 Public Client와 Confidential Client로 크게 나뉨
+- 명칭이 아래처럼 바뀜
+
+.code res/snippets /1.0a/,/Service Provider/
+
+- Authorization Server와 Resource Server는 분리 가능
+
+* OAuth Service Providers
+
+.image res/oauth2_provider.png
+
+.link http://dev.kthcorp.com/2012/12/12/oauth-2-0-open-api-auth/ KTH 개발자 블로그
+
+* Useful Tools
+
+.link https://code.google.com/apis/console/?pli=1#project:474377512137 API console
+.link https://developers.google.com/oauthplayground/ OAuth 2.0 Playground
+.link https://developers.google.com/apis-explorer/#s/ APIs Explorer
+.link https://code.google.com/apis/ajax/playground/ Ajax Code Playground
+.link https://accounts.google.com/b/0/IssuedAuthSubTokens Authorized Access to your Google Account
+
+* Keys, access, security, and identity
+
+The APIs represented in the Google APIs Console require that requests include a unique project identifier. This enables the Console to tie a request to a specific project in order to monitor traffic, enforce quotas, and handle billing. Google supports two separate mechanisms to create a unique project identifier: OAuth 2.0 client IDs and API keys.
+
+- OAuth 2.0 client ID
+- API key
+
+* OAuth 2.0 client ID
+
+client ID를 만들 수 있는 종류와 Google이 지원하는 OAuth 2.0 시나리오
+
+- Web application: Login, Web Server Applications, Client-side Applications
+- Service account: Service Accounts
+- Installed application: Installed Applications, Devices
+
+* API key
+
+- 모든 API 호출 시, 파라미터로 key={API_key}를 붙여준다.
+- 유저의 동의를 받지 않기 때문에 계정 정보에 접근하지는 못 한다.
+- 인가(authorization)을 위해 사용되는 것은 아니다.
+
+* 필요 패키지들
+
+OAuth 2.0 패키지
+
+    $ go get code.google.com/p/goauth2
+
+Google APIs Client Library for Go
+
+    $ go get code.google.com/p/google-api-go-client
+
+.html res/other-libraries.html

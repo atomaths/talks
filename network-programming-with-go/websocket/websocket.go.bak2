@@ -1,0 +1,64 @@
+package main
+
+import (
+	"log"
+	"net/http"
+	"websocket"
+)
+
+const MAX_CLIENT = 100
+
+var (
+	chConn = make(chan *websocket.Conn, MAX_CLIENT)
+	chMsg  = make(chan []byte, MAX_CLIENT)
+)
+
+func ChatServer(ws *websocket.Conn) {
+	chConn <- ws
+	buf := make([]byte, 1024)
+	for n, e := ws.Read(buf); e == nil; n, e = ws.Read(buf) {
+		chMsg <- buf[0:n]
+	}
+
+	// 여기가 클라이언트가 종료 보낸 시점
+	ws.Close()
+}
+
+type Client struct {
+	conn *websocket.Conn
+	id string
+	ip string
+}
+
+func WriteToClient() {
+	clients := make([]*websocket.Conn, 0, MAX_CLIENT)
+	for {
+		select {
+		case newConn := <-chConn:
+			clients = append(clients, newConn)
+		case msg := <-chMsg:
+			log.Println(">", string(msg))
+			for _, v := range clients {
+				if _, e := v.Write(msg); e != nil { //assuming the client disconnected on write errors
+					// somekindofstorage.Remove(v)
+					log.Printf("%V", v)
+				}
+			}
+		}
+	}
+}
+
+func IndexPage(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./index.html")
+}
+
+func main() {
+	go WriteToClient()
+
+	http.HandleFunc("/", IndexPage)
+	http.Handle("/chat", websocket.Handler(ChatServer))
+	err := http.ListenAndServe(":9009", nil)
+	if err != nil {
+		panic("ListenAndServe: " + err.Error())
+	}
+}
